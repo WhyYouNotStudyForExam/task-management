@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AddTaskForm from './AddTaskForm';
 
 interface Task {
     id: number;
@@ -9,16 +10,25 @@ interface Task {
 const TaskList: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    const loadTasks = async () => {
+        const response = await fetch('http://localhost:8080/api/tasks');
+        const data = await response.json();
+        setTasks(data);
+    };
+
     useEffect(() => {
-        fetch('http://localhost:8080/api/tasks')
-            .then(response => response.json())
-            .then(data => setTasks(data))
-            .catch(error => console.error('Error fetching tasks:', error));
+        loadTasks();
     }, []);
+
+    const handleTaskAdded = (newTask: Task) => {
+         loadTasks();
+    };
 
     return (
         <div>
-            <h1>Task List</h1>
+            <h2>Neue Aufgabe hinzufügen</h2>
+            <AddTaskForm onTaskAdded={handleTaskAdded}/>
+            <h2>Aufgabenliste</h2>
             <ul>
                 {tasks.map(task => (
                     <li key={task.id}>
