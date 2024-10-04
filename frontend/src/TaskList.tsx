@@ -7,7 +7,12 @@ interface Task {
     completed: boolean;
 }
 
-const TaskList: React.FC = () => {
+interface TaskListProps {
+    tasks: Task[];
+    onTaskAdded: (newTask: Task) => void;
+}
+
+const TaskList: React.FC<TaskListProps> = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
     const loadTasks = async () => {
