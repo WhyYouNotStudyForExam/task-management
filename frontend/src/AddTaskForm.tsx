@@ -49,14 +49,13 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onTaskAdded }) => {
         alert('Error: ' + JSON.stringify(errorData));
     };
 
-    // Methode zur Fehlerbehandlung bei unerwarteten Fehlern
     const handleUnexpectedError = (error: any) => {
         console.error('Request failed:', error);
         alert('An unexpected error occurred. Please try again.');
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="task-form">
             <div>
                 <input
                     id="title"

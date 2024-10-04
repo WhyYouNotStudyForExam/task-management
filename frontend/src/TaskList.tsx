@@ -25,7 +25,7 @@ const TaskList: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="task-container">
             <h2>Neue Aufgabe hinzufügen</h2>
             <AddTaskForm onTaskAdded={handleTaskAdded}/>
             <h2>Aufgabenliste</h2>
